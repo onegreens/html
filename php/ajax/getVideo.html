@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<script>
+function showSite(str)
+{
+    if (str=="")
+    {
+        document.getElementById("txtHint").innerHTML="";
+        return;
+    } 
+    if (window.XMLHttpRequest)
+    {
+        // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {
+        // IE6, IE5 浏览器执行代码
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open("GET","getVideo_mysql.php?q="+str,true);
+    xmlhttp.send();
+}
+</script>
+</head>
+<body>
+ 
+<form>
+<select name="users" onchange="showSite(this.value)">
+<option value="">选择一个视频类型:</option>
+<option value="m">电影</option>
+<option value="tv">电视剧</option>
+<option value="va">综艺</option>
+<option value="ct">动漫</option>
+</select>
+</form>
+<br>
+<div id="txtHint"><b>网站信息显示在这里……</b></div>
+ 
+</body>
+</html>

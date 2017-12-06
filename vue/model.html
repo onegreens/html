@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>模板</title>
+  <script src="vue.min.js"></script>
+</head>
+
+<body>
+  <p>数据绑定最常见的形式就是使用 {{...}}（双大括号）的文本插值</p>
+  <div id="app">
+    <p>{{ message }}</p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue.js!'
+      }
+    })
+  </script>
+  <br> --------------------------------------------
+  <br>
+  <p>html</p>
+  <p>使用 v-html 指令用于输出 html 代码
+  </p>
+  <div id="test_html">
+    <div v-html="message"></div>
+  </div>
+  <script>
+    new Vue({
+      el: '#test_html',
+      data: {
+        message: '<h1>html输出</h1>'
+      }
+    })
+  </script>
+  <br> --------------------------------------------
+  <br>
+  <p>属性</p>
+  <p>HTML 属性中的值应使用 v-bind 指令。</p>
+  <p>以下实例判断 class1 的值，如果为 true 使用 class1 类的样式，否则不使用该类</p>
+  <style>
+    .class1 {
+      background: #444;
+      color: #eee;
+    }
+  </style>
+  <div id="test_bind">
+    <label for="r1">修改颜色</label><input type="checkbox" v-model="class1" id="r1">
+    <br><br>
+    <div v-bind:class="{'class1': class1}">
+      directiva v-bind:class
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#test_bind',
+      data: {
+        class1: false
+      }
+    });
+  </script>
+  <br> --------------------------------------------
+  <br>
+  <p>表达式</p>
+  <p>双括号里面的值</p>
+  <div id="test_express">
+    {{5+5}}<br> {{ok?'yes':'no'}}
+    <br> {{ message.split('').reverse().join('') }}
+    <div v-bind:id="'list-' + id">菜鸟教程</div>
+  </div>
+  <script>
+    new Vue({
+      el: '#test_express',
+      data: {
+        ok: true,
+        message: 'RUNOOB',
+        id: 1
+      }
+    })
+  </script>
+  <br> --------------------------------------------
+  <br>
+  <p>指令</p>
+  <p>
+    指令是带有 v- 前缀的特殊属性。
+  </p>
+  <div id="test_if">
+    <label for="r2">显示/隐藏</label><input type="checkbox" v-model="seen" id="r2">
+    <br><br>
+    <p v-if="seen">现在你看到我了</p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#test_if',
+      data: {
+        seen: true
+      }
+    })
+  </script>
+  <br> --------------------------------------------
+  <br>
+  <p>参数</p>
+  <p>参数在指令后以冒号指明</p>
+  <div id="test_arg">
+    <pre><a v-bind:href="url">菜鸟教程</a></pre>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#test_arg',
+      data: {
+        url: 'http://www.runoob.com'
+      }
+    })
+  </script>
+
+  <br> --------------------------------------------
+  <br>
+  <p>用户输入</p>
+  <p>在 input 输入框中我们可以使用 v-model 指令来实现双向数据绑定</p>
+  <div id="test_bind_t">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+
+  <script>
+    new Vue({
+      el: '#test_bind_t',
+      data: {
+        message: 'Runoob!'
+      }
+    })
+  </script>
+  <br>
+  <p>按钮的事件我们可以使用 v-on 监听事件，并对用户的输入进行响应。</p>
+  <div id="rest_method">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">反转字符串</button>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#rest_method',
+      data: {
+        message: 'Runoob!'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    })
+  </script>
+
+  <br> --------------------------------------------
+  <br>
+  <p>过滤器</p>
+  <p>实例：对输入的字符串第一个字母转为大写：</p>
+  <div id="app">
+    {{ message | capitalize }}
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'runoob'
+      },
+      filters: {
+        capitalize: function (value) {
+          if (!value) return ''
+          value = value.toString()
+          return value.charAt(0).toUpperCase() + value.slice(1)
+        }
+      }
+    })
+  </script>
+  <br> --------------------------------------------
+  <br>
+  <p>缩写</p>
+  <!-- 完整语法 -->
+  <a v-bind:href="url"></a>
+  <!-- 缩写 -->
+  <a :href="url"></a>
+  <!-- 完整语法 -->
+  <a v-on:click="doSomething"></a>
+  <!-- 缩写 -->
+  <a @click="doSomething"></a>
+  <br> --------------------------------------------
+  <br>
+  <p>属性与方法</p>
+  <script>
+    var data = { a: 1 }
+    var vm = new Vue({
+      data: data
+    })
+    vm.a === data.a // -> true
+    // 设置属性也会影响到原始数据
+    vm.a = 2
+    data.a // -> 2
+    // ... 反之亦然
+    data.a = 3
+    vm.a // -> 3
+    var data = { a: 1 }
+    var vm = new Vue({
+      el: '#example',
+      data: data
+    })
+    vm.$data === data // -> true
+    vm.$el === document.getElementById('example') // -> true
+    // $watch 是一个实例方法
+    vm.$watch('a', function (newVal, oldVal) {
+      // 这个回调将在 `vm.a`  改变后调用
+    })
+  </script>
+
+</body>
+
+</html>

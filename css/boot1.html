@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <meta name=renderer content=webkit>
+    <meta charset="utf-8">
+    <title>视频处理</title>
+    <link type="text/css" rel="stylesheet" href="crawler_css.css" /> </head>
+
+<body>
+    <div class="div_main">
+        <div class="div_nav">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#" onclick="change(this,'div_catchByUrl')">抓取</a></li>
+                <li role="presentation"><a href="#" onclick="change(this,'div_updateByKeywords')">更新</a></li>
+                <li role="presentation"><a href="#" onclick="change(this,'div_delByKeyword')">删除</a></li>
+            </ul>
+        </div>
+        <div id="view" class="div_index2"></div>
+    </div>
+    <div class="div_index3" id="save">
+        <div id="div_catchByUrl" class="div_module">
+            <h2>视频抓取</h2>
+            <div id="div_catchByUrl_mian">
+                <p class="form_p">示例url模型：http://www.360kan.com/type/keywords.html </p>
+                <p class="form_p">示例url：http://www.360kan.com/tv/RLltbH7kTG0tMn.html </p>
+                <form id="cbu" action="catchByUrl.do" method="post">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><input class="form_input" type="text" name="url" placeholder="请输入地址！！！"></td>
+                            </tr>
+                            <tr>
+                                <td><input class="form_input" type="password" name="password" placeholder="请输入密码！！！"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <c:if test="${!empty msg_c}">
+                                        <font color="red">
+                                            <c:out value="${msg_c}" /> </font>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input class="form_btn" value="提交" type="button" onclick="check('cbu','url')">
+                    <input class="form_btn" value="重置" type="button" onclick="reset_msg('cbu')">
+                </form>
+            </div>
+        </div>
+
+        <div id="div_updateByKeywords" class="div_module">
+            <h2>更新视频</h2>
+            <p>示例keywords：http://www.360kan.com/tv/
+                <span class="span_keyword">RLltbH7kTG0tMn</span>.html中的 -->
+            <span class="span_keyword">RLltbH7kTG0tMn</span>
+        </p>
+        <form id="ubks"action="updateByKeywords.do" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <input class="form_input" type="text" name="keywords" placeholder="请输入关键词！！！"></td>
+                </tr>
+                <tr>
+                    <td><input class="form_input" type="password" name="password" placeholder="请输入密码！！！"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <c:if test="${!empty msg_uk}">
+                            <font color="red">
+                                <c:out value="${msg_uk}" /> </font>
+                        </c:if>
+                    </td>
+                </tr>
+            </table>
+            <input class="form_btn" value="提交" type="button" onclick="check('ubks','keywords')">
+            <input class="form_btn" name="重置" type="reset"></form>
+    </div>
+    <div id="div_delByKeyword" class="div_module">
+        <h2>删除视频</h2>
+        <p>示例keywords：http://www.360kan.com/tv/
+            <span color="red">RLltbH7kTG0tMn</span>.html中的 -->
+                <span color="red">RLltbH7kTG0tMn</span>
+            </p>
+            <form id="dbk" action="delByKeyword.do" method="post">
+                <table>
+                    <tr>
+                        <td><input class="form_input" type="text" name="keywords" placeholder="请输入关键词！！！"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="form_input" type="password" name="password" placeholder="请输入密码！！！"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <c:if test="${!empty msg_del}">
+                                <span color="red">
+                                <c:out value="${msg_del}" /> </span>
+                            </c:if>
+                        </td>
+                    </tr>
+                </table>
+                <input class="form_btn" value="提交" type="button" onclick="check('dbk','keywords')">
+                <input class="form_btn" name="重置" type="reset"></form>
+        </div>
+    </div>
+    <script type="text/javascript" src="crawler_js.js"></script>
+</body>
+
+</html>

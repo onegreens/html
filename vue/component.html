@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>组件</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+</head>
+
+<body>
+    <p>定义组件：Vue.component(tagName, options)</p>
+    <div id="app">
+        <runoob></runoob>
+    </div>
+
+    <script>
+        // 注册
+        Vue.component('runoob', {
+            template: '<h1>自定义组件!</h1>'
+        })
+        // 创建根实例
+        new Vue({
+            el: '#app'
+        })
+    </script>
+    <br>
+    <p>--------------------------------</p>
+    <br>
+    <p>局部组件</p>
+    <div id="app1">
+        <runoob></runoob>
+    </div>
+
+    <script>
+        var Child = {
+            template: '<h1>自定义组件!</h1>'
+        }
+
+        // 创建根实例
+        new Vue({
+            el: '#app1',
+            components: {
+                // <runoob> 将只在父模板可用
+                'runoob': Child
+            }
+        })
+    </script>
+    <br>
+    <p>--------------------------------</p>
+    <br>
+    <p>prop 是父组件用来传递数据的一个自定义属性。 父组件的数据需要通过 props 把数据传给子组件，子组件需要显式地用 props 选项声明 "prop"：</p>
+    <div id="app2">
+        <child message="hello!"></child>
+    </div>
+
+    <script>
+        // 注册
+        Vue.component('child', {
+            // 声明 props
+            props: ['message'],
+            // 同样也可以在 vm 实例中像 "this.message" 这样使用
+            template: '<span>{{ message }}</span>'
+        })
+        // 创建根实例
+        new Vue({
+            el: '#app2'
+        })
+    </script>
+    <br>
+    <p>--------------------------------</p>
+    <br>
+    <p>类似于用 v-bind 绑定 HTML 特性到一个表达式，也可以用 v-bind 动态绑定 props 的值到父组件的数据中。每当父组件的数据变化时，该变化也会传导给子组件：</p>
+    <div id="app3">
+        <div>
+            <input v-model="parentMsg">
+            <br>
+            <child v-bind:message="parentMsg"></child>
+        </div>
+    </div>
+
+    <script>
+        // 注册
+        Vue.component('child', {
+            // 声明 props
+            props: ['message'],
+            // 同样也可以在 vm 实例中像 "this.message" 这样使用
+            template: '<span>{{ message }}</span>'
+        })
+        // 创建根实例
+        new Vue({
+            el: '#app3',
+            data: {
+                parentMsg: '父组件内容'
+            }
+        })
+    </script>
+    <br>
+    <p>--------------------------------</p>
+    <br>
+    <p>将 v-bind 指令将 todo 传到每一个重复的组件中</p>
+    <div id="app4">
+        <ol>
+            <todo-item v-for="item in sites" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
+
+    <script>
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        })
+        new Vue({
+            el: '#app4',
+            data: {
+                sites: [
+                    { text: 'Runoob' },
+                    { text: 'Google' },
+                    { text: 'Taobao' }
+                ]
+            }
+        })
+    </script>
+<br>
+<p>--------------------------------</p>
+<br>
+<p></p>
+    <div id="app5">
+        <div id="counter-event-example">
+            <p>{{ total }}</p>
+            <button-counter v-on:increment="incrementTotal"></button-counter>
+            <button-counter v-on:increment="incrementTotal"></button-counter>
+        </div>
+    </div>
+
+    <script>
+        Vue.component('button-counter', {
+            template: '<button v-on:click="increment">{{ counter }}</button>',
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                increment: function () {
+                    this.counter += 1
+                    this.$emit('increment')
+                }
+            },
+        })
+        new Vue({
+            el: '#counter-event-example',
+            data: {
+                total: 0
+            },
+            methods: {
+                incrementTotal: function () {
+                    this.total += 1
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

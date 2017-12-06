@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <div id="result"></div>
+    <script>
+        //在使用 web 存储前,应检查浏览器是否支持 localStorage 和sessionStorage:
+        if (typeof (Storage) !== "undefined") {
+            // 是的! 支持 localStorage  sessionStorage 对象!
+            // 一些代码.....
+            console.info("支持");
+            // 使用 key="sitename" 和 value="菜鸟教程" 创建一个 localStorage 键/值对。
+            localStorage.sitename = "菜鸟教程";
+            // 检索键值为"sitename" 的值然后将数据插入 id="result"的元素中。
+            document.getElementById("result").innerHTML = "网站名：" + localStorage.sitename;
+
+            if (localStorage.clickcount) {
+                localStorage.clickcount = Number(localStorage.clickcount) + 1;
+            }
+            else {
+                localStorage.clickcount = 1;
+            }
+            document.getElementById("result").innerHTML = " 你已经点击了按钮 " + localStorage.clickcount + " 次 ";
+        } else {
+            // 抱歉! 不支持 web 存储。
+            console.info("不支持");
+        }
+    </script>
+</body>
+
+</html>

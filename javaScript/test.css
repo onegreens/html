@@ -1,0 +1,13 @@
+.recommend{
+    width: 300px;
+}
+.recommend tr{
+    width: 300px;
+}
+.recommend tr td{
+    width: 100px;
+}
+.recommend tr td img{
+    width: 100px;
+    height: 150px;
+}

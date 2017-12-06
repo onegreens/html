@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>css演示</title>
+
+    <style>
+        .div_radius {
+            border: 2px solid;
+            width: 200px;
+            border-radius: 25px;
+            -moz-border-radius: 25px;
+            /* Old Firefox */
+        }
+
+        .div_shadow {
+            box-shadow: 10px 10px 5px #888888;
+            width: 200px;
+        }
+
+        .div_border_image {
+            border-image: url(border.png) 30 30 round;
+            /* -moz-border-image: url(border.png) 30 30 round;
+            /* 老的 Firefox */
+            /* -webkit-border-image: url(border.png) 30 30 round; */
+            /* Safari 和 Chrome */
+            /* -o-border-image: url(border.png) 30 30 round; */
+            /* Opera */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="div_radius">这个矩形有圆角哦！</div>
+    <br>
+    <div class="div_shadow">CSS3 边框阴影</div>
+    <br>
+    <div class="div_border_image">边框图片</div>
+    
+</body>
+
+</html>
